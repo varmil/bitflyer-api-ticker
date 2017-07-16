@@ -1,0 +1,19 @@
+version: '2'
+services:
+  mariadb-data:
+    image: busybox
+    volumes:
+      - /var/lib/mysql
+  redis-data:
+    image: busybox
+    volumes:
+      - /data
+
+  mariadb:
+    image: mariadb:10.2.7
+    ports:
+      - "3306:3306"
+    volumes_from:
+      - mariadb-data
+    environment:
+      MYSQL_ALLOW_EMPTY_PASSWORD: "yes"
